@@ -1,0 +1,12 @@
+.container {
+  display: inline-flex;
+  padding: 5px 10px;
+  font-size: small;
+  font-weight: bold;
+}
+
+.filled {
+  background-color: black;
+  color: white;
+  border-radius: 16px;
+}
