@@ -49,17 +49,19 @@ const Ticket: React.FC = () => {
             {ticket.updated_at ? `, last updated at ${ticket.updated_at}` : ""}
           </p>
           {ticket.due_at ? `Due at ${ticket.due_at}` : ""}
-          <p>Priority: {ticket.priority}</p>
-          <p>Status: {ticket.status}</p>
+          <p>Priority: {ticket.priority || "None"}</p>
+          <p>Status: {ticket.status || "None"}</p>
 
           <Button
             text={`${viewJson ? "Hide" : "View"} full JSON`}
             onClick={() => setViewJson((j) => !j)}
+            style={{
+              paddingLeft: 0,
+            }}
           />
 
           {viewJson ? (
             <div className={styles.jsonContainer}>
-              <hr />
               <pre>{JSON.stringify(ticket, null, 2)}</pre>
             </div>
           ) : null}
