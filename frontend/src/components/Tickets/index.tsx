@@ -4,6 +4,7 @@ import cstyles from "../styles/Clickable.module.css";
 import { Ticket, TicketsRes, PaginationData } from "./types";
 import { useNavigate } from "react-router";
 import Button from "../Button";
+import { backendApi } from "../constants";
 
 const perPage = 25;
 const descriptionMax = 100;
@@ -39,7 +40,7 @@ const Tickets: React.FC = () => {
     try {
       setLoading(true);
       const ticketRes: TicketsRes = await (
-        await fetch(`/tickets/${perPage}/${after}/${before}`)
+        await fetch(`${backendApi}/tickets/${perPage}/${after}/${before}`)
       ).json();
       setTickets(ticketRes.tickets);
       setPagination((p) => ({
@@ -85,6 +86,7 @@ const Tickets: React.FC = () => {
             {tickets.map((ticket, i) => (
               <div key={i} className={styles.ticketContainer}>
                 <div
+                  data-testid="ticket"
                   className={cstyles.clickable}
                   onClick={() => navigate(`/${ticket.id}`)}
                 >

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router";
 import Button from "../Button";
+import { backendApi } from "../constants";
 import { Ticket as TicketType } from "../Tickets/types";
 import styles from "./Ticket.module.css";
 
@@ -18,7 +19,9 @@ const Ticket: React.FC = () => {
     (async () => {
       try {
         setLoading(true);
-        const ticketRes = await (await fetch(`/ticket/${id}`)).json();
+        const ticketRes = await (
+          await fetch(`${backendApi}/ticket/${id}`)
+        ).json();
         setTicket(ticketRes.ticket);
         setError(false);
       } catch (e) {
@@ -37,9 +40,9 @@ const Ticket: React.FC = () => {
 
       {!loading && !error ? (
         <div className={styles.ticketContainer}>
-          <h1>{ticket.subject}</h1>
+          <h1 data-testid="ticket-subject">{ticket.subject}</h1>
 
-          <p>{ticket.description}</p>
+          <p data-testid="ticket-desc">{ticket.description}</p>
           <small>Tags: {ticket.tags ? ticket.tags.join(" • ") : "None"}</small>
           <p>
             Created at {ticket.created_at}
