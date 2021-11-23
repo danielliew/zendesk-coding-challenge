@@ -10,3 +10,8 @@
   color: white;
   border-radius: 16px;
 }
+
+.disabled {
+  cursor: not-allowed;
+  color: #a5a5a5;
+}

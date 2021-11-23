@@ -1,7 +1,3 @@
-.container {
-  padding: 2vh 25vw;
-}
-
 .pre {
   margin: 0px;
   font-size: small;
@@ -14,14 +10,28 @@ h1 {
 
 header {
   box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
-    rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    rgba(0, 0, 0, 0.187) 0px 8px 16px -8px;
   margin: 20px 0px 40px 0px;
   padding: 15px 30px;
   border-radius: 15px;
 }
 
-@media only screen and (max-width: 768px) {
-  .container {
-    padding: 2vh 3vw;
-  }
+.ticketsContainer {
+  padding: 0px 7px;
+}
+
+.ticketContainer {
+  margin: 3vh 0px;
+}
+
+.ticketContainer > div > h2 {
+  margin: 0px;
+}
+
+.ticketContainer > div > p {
+  margin: 7px 0px;
+}
+
+.paginationContainer {
+  text-align: center;
 }

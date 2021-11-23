@@ -1,0 +1,9 @@
+.container {
+  padding: 2vh 25vw 10vh 25vw;
+}
+
+@media only screen and (max-width: 600px) {
+  .container {
+    padding: 2vh 3vw;
+  }
+}
