@@ -30,13 +30,13 @@ Run the backend and frontend. You may either run in development mode which will 
 # run in development
 cd backend
 npm run dev
-cd ../frontend
+cd frontend # in another terminal
 npm start
 
 # compile and run in production
 cd backend
 npm run build && npm start
-cd ../frontend
+cd frontend # in another terminal
 npm run build && serve -s build
 ```
 

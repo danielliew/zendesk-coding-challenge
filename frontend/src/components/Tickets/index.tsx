@@ -75,6 +75,7 @@ const Tickets: React.FC<TicketsProps> = ({ urlPath }) => {
     return () => {
       setTickets([]);
     };
+    // eslint-disable-next-line
   }, []);
 
   return (

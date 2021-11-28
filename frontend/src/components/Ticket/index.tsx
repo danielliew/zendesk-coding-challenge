@@ -41,7 +41,7 @@ const Ticket: React.FC<TicketProps> = ({ urlPath }) => {
     return () => {
       setTicket({});
     };
-  }, []);
+  }, [id, urlPath]);
 
   return (
     <div>
