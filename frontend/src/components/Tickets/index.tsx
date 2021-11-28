@@ -103,6 +103,10 @@ const Tickets: React.FC<TicketsProps> = ({ urlPath }) => {
                   className={cstyles.clickable}
                   onClick={() => navigate(`/${ticket.id}`)}
                 >
+                  <small>
+                    {ticket.status || "no status"}, {ticket.priority || "no"}{" "}
+                    priority
+                  </small>
                   <h2>{ticket.subject}</h2>
                   <p>
                     {ticket.description &&
