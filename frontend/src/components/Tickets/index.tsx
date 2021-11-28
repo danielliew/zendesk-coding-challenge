@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Tickets.module.css";
 import cstyles from "../styles/Clickable.module.css";
-import { Ticket, TicketsRes, PaginationData } from "./types";
+import { Ticket, TicketsRes, PaginationData, TicketsProps } from "./types";
 import { useNavigate } from "react-router";
 import Button from "../Button";
 import { backendApi } from "../constants";
@@ -9,7 +9,14 @@ import { backendApi } from "../constants";
 const perPage = 25;
 const descriptionMax = 100;
 
-const Tickets: React.FC = () => {
+/**
+ * the Tickets page
+ *
+ * - lists a set number of tickets (const perPage)
+ * - cursor pagination linked to the zendesk api
+ * - handles loading, API error, no tickets
+ */
+const Tickets: React.FC<TicketsProps> = ({ urlPath }) => {
   const navigate = useNavigate();
 
   const [tickets, setTickets] = useState<Ticket[]>([]);
@@ -40,14 +47,14 @@ const Tickets: React.FC = () => {
     try {
       setLoading(true);
       const ticketRes: TicketsRes = await (
-        await fetch(`${backendApi}/tickets/${perPage}/${after}/${before}`)
+        await fetch(`${backendApi}/${urlPath}/${perPage}/${after}/${before}`)
       ).json();
       setTickets(ticketRes.tickets);
       setPagination((p) => ({
         has_more: ticketRes.meta.has_more,
         after_cursor: ticketRes.meta.after_cursor,
         before_cursor: ticketRes.meta.before_cursor,
-        cursor: after ? (p.cursor = 1) : before ? p.cursor - 1 : p.cursor,
+        cursor: after ? p.cursor + 1 : before ? p.cursor - 1 : p.cursor,
       }));
       setError(false);
     } catch (e) {
@@ -65,6 +72,9 @@ const Tickets: React.FC = () => {
 
   useEffect(() => {
     getTickets({});
+    return () => {
+      setTickets([]);
+    };
   }, []);
 
   return (
@@ -78,7 +88,9 @@ const Tickets: React.FC = () => {
       <section>
         {loading && <p>Loading...</p>}
 
-        {!loading && !error && !tickets.length ? <p>No tickets found</p> : null}
+        {!loading && !error && !tickets.length ? (
+          <small>No tickets found</small>
+        ) : null}
 
         {!loading && !error && tickets.length ? (
           <div className={styles.ticketsContainer}>

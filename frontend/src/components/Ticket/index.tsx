@@ -4,8 +4,16 @@ import Button from "../Button";
 import { backendApi } from "../constants";
 import { Ticket as TicketType } from "../Tickets/types";
 import styles from "./Ticket.module.css";
+import { TicketProps } from "./types";
 
-const Ticket: React.FC = () => {
+/**
+ * the Ticket page
+ *
+ * - displays ticket details for a valid ticket id
+ * - handles loading, API error, no tickets
+ * - ability to view raw json
+ */
+const Ticket: React.FC<TicketProps> = ({ urlPath }) => {
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -20,7 +28,7 @@ const Ticket: React.FC = () => {
       try {
         setLoading(true);
         const ticketRes = await (
-          await fetch(`${backendApi}/ticket/${id}`)
+          await fetch(`${backendApi}/${urlPath}/${id}`)
         ).json();
         setTicket(ticketRes.ticket);
         setError(false);
@@ -30,6 +38,9 @@ const Ticket: React.FC = () => {
         setLoading(false);
       }
     })();
+    return () => {
+      setTicket({});
+    };
   }, []);
 
   return (

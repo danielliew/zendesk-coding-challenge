@@ -51,3 +51,7 @@ export interface TicketsRes {
   tickets: Ticket[];
   meta: PaginationData;
 }
+
+export interface TicketsProps {
+  urlPath: string;
+}
