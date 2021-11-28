@@ -14,15 +14,22 @@ const handlers = [
       const { pageSize, after, before } = req.params;
       return res(
         ctx.json({
-          tickets: mockTickets.tickets.slice(0, pageSize),
+          tickets:
+            after !== "undefined"
+              ? mockTickets.tickets.slice(pageSize, pageSize * 2)
+              : mockTickets.tickets.slice(0, pageSize),
           meta: {
-            has_more: false,
+            has_more: true,
             after_cursor: "asdf",
             before_curosr: "asdf",
           },
         })
       );
     }
+  ),
+  rest.get(
+    `${backendApi}/err-tickets/:pageSize/:after/:before`,
+    (_req, res, ctx) => res(ctx.status(500))
   ),
   rest.get(`${backendApi}/ticket/:id`, async (req, res, ctx) => {
     const { id } = req.params;
@@ -34,6 +41,9 @@ const handlers = [
       })
     );
   }),
+  rest.get(`${backendApi}/err-ticket/:id`, (_req, res, ctx) =>
+    res(ctx.status(500))
+  ),
 ];
 
 export { handlers };
