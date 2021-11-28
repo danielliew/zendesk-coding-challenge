@@ -3,6 +3,15 @@ import styles from "./Button.module.css";
 import cstyles from "../styles/Clickable.module.css";
 import { ButtonProps } from "./types";
 
+/**
+ * a reusable Button component
+ *
+ * - text: button text
+ * - onClick: callback
+ * - filled: fill button and invert text color
+ * - disabled: button will be shaded lighter
+ * - style: Css overrrides
+ */
 const Button: React.FC<ButtonProps> = ({
   text,
   onClick,

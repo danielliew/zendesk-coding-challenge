@@ -1,10 +1,8 @@
 import axios from "axios";
+import { baseURL } from "./constants";
 
 const zendeskApi = axios.create({
-  baseURL: "https://zccdanielliew.zendesk.com/api/v2/",
-  headers: {
-    Authorization: `Bearer ${process.env.ZENDESK_OAUTH}`,
-  },
+  baseURL,
 });
 
 zendeskApi.interceptors.request.use((config) => {

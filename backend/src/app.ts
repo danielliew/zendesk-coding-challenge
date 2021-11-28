@@ -9,6 +9,9 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+/**
+ * a route to get all tickets from zendesk via cursor pagination
+ */
 app.get(
   "/tickets/:pageSize/:after/:before",
   async (req: Request, res: Response) => {
@@ -26,6 +29,9 @@ app.get(
   }
 );
 
+/**
+ * shows a single ticket for a valid ticket id
+ */
 app.get("/ticket/:id", async (req: Request, res: Response) => {
   const { id } = req.params;
   try {
